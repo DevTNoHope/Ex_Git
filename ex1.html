@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JS DOM paragraph style</title>
+    <style>
+      body {
+        margin: 30px;
+      }
+      table,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+      }
+      img {
+        margin-top: 20px;
+      }
+      #ajax p {
+        margin: 10px 0;
+      }
+      #ajax .meta {
+        font-size: 12px;
+        opacity: 0.75;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="text">JavaScript</p>
+
+    <div>
+      <button id="jsstyle" onclick="js_style()">Style</button>
+    </div>
+
+    <script>
+      function js_style() {
+        // Lấy thẻ p theo id
+        let element = document.getElementById("text");
+
+        // Thay đổi màu chữ
+        element.style.color = "red";
+
+        // Thay đổi kích thước chữ
+        element.style.fontSize = "40px";
+      }
+    </script>
+    <button onclick="changeBackground()">Đổi màu nền</button>
+
+    <script>
+      function changeBackground() {
+        document.body.style.backgroundColor = "lightblue";
+      }
+    </script>
+    <p>
+      <a
+        id="somelink"
+        type="text/html"
+        hreflang="en-us"
+        rel="nofollow"
+        target="_self"
+        href="http://www.google.com/"
+      >
+        Google Website
+      </a>
+    </p>
+
+    <button onclick="getAttributes()">
+      Click here to get attributes value
+    </button>
+
+    <script>
+      function getAttributes() {
+        // Lấy thẻ a theo id
+        let link = document.getElementById("somelink");
+
+        // Lấy từng thuộc tính
+        let hrefValue = link.getAttribute("href");
+        let hreflangValue = link.getAttribute("hreflang");
+        let relValue = link.getAttribute("rel");
+        let targetValue = link.getAttribute("target");
+
+        // In ra Console
+        console.log("href:", hrefValue);
+        console.log("hreflang:", hreflangValue);
+        console.log("rel:", relValue);
+        console.log("target:", targetValue);
+
+        // Hoặc hiển thị ra màn hình
+        alert(
+          "href: " +
+            hrefValue +
+            "\n" +
+            "hreflang: " +
+            hreflangValue +
+            "\n" +
+            "rel: " +
+            relValue +
+            "\n" +
+            "target: " +
+            targetValue,
+        );
+      }
+    </script>
+    <table id="sampleTable" border="1">
+      <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+      </tr>
+      <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+      </tr>
+    </table>
+    <br />
+
+    <input type="button" onclick="insert_Row()" value="Insert row" />
+
+    <script>
+      function insert_Row() {
+        // Lấy bảng
+        let table = document.getElementById("sampleTable");
+
+        // Thêm dòng mới ở cuối bảng
+        let newRow = table.insertRow(-1);
+
+        // Thêm 2 ô mới
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+
+        // Nội dung cho ô
+        cell1.innerHTML = "New Cell1";
+        cell2.innerHTML = "New Cell2";
+      }
+    </script>
+    <table id="myTable" border="1">
+      <tr>
+        <td>Row1 cell1</td>
+        <td>Row1 cell2</td>
+      </tr>
+      <tr>
+        <td>Row2 cell1</td>
+        <td>Row2 cell2</td>
+      </tr>
+    </table>
+
+    <form>
+      <input type="button" onclick="changeContent()" value="Change content" />
+    </form>
+
+    <script>
+      function changeContent() {
+        // Lấy bảng
+        let table = document.getElementById("myTable");
+
+        // Lấy tất cả các ô td trong bảng
+        let cells = table.getElementsByTagName("td");
+
+        // Duyệt qua từng ô
+        for (let i = 0; i < cells.length; i++) {
+          cells[i].innerHTML += " Thắng deptrai";
+        }
+      }
+    </script>
+    <table id="myTable"></table>
+
+    <br />
+
+    <input type="button" onclick="createTable(3, 5)" value="Create the table" />
+
+    <script>
+      function createTable(rows, cols) {
+        let table = document.getElementById("myTable");
+
+        // Xóa nội dung cũ nếu có
+        table.innerHTML = "";
+
+        for (let i = 0; i < rows; i++) {
+          let row = table.insertRow();
+
+          for (let j = 0; j < cols; j++) {
+            let cell = row.insertCell();
+
+            cell.innerHTML = "Row " + (i + 1) + " Col " + (j + 1);
+          }
+        }
+      }
+    </script>
+    <form>
+      <select id="colorSelect">
+        <option>Red</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Black</option>
+      </select>
+
+      <input type="button" onclick="removeColor()" value="Select and Remove" />
+    </form>
+
+    <script>
+      function removeColor() {
+        // Lấy dropdown
+        let select = document.getElementById("colorSelect");
+
+        // Lấy vị trí option đang chọn
+        let selectedIndex = select.selectedIndex;
+
+        // Nếu có chọn
+        if (selectedIndex !== -1) {
+          select.remove(selectedIndex);
+        } else {
+          alert("Please select an item first!");
+        }
+      }
+    </script>
+    <button onclick="showRandomImage()">Hiển thị ảnh ngẫu nhiên</button>
+
+    <div id="imageContainer"></div>
+
+    <script>
+      function showRandomImage() {
+        // Danh sách ảnh
+        let images = [
+          {
+            url: "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+            width: 240,
+            height: 160,
+          },
+          {
+            url: "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+            width: 320,
+            height: 195,
+          },
+          {
+            url: "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg",
+            width: 500,
+            height: 343,
+          },
+        ];
+
+        // Chọn ảnh ngẫu nhiên
+        let randomIndex = Math.floor(Math.random() * images.length);
+        let selectedImage = images[randomIndex];
+
+        // Tạo thẻ img
+        let img = document.createElement("img");
+        img.src = selectedImage.url;
+        img.width = selectedImage.width;
+        img.height = selectedImage.height;
+
+        // Hiển thị ảnh
+        let container = document.getElementById("imageContainer");
+        container.innerHTML = ""; // xóa ảnh cũ
+        container.appendChild(img);
+      }
+    </script>
+    <h2>Kích thước cửa sổ trình duyệt:</h2>
+    <p id="sizeInfo"></p>
+
+    <script>
+      function showWindowSize() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        document.getElementById("sizeInfo").innerHTML =
+          "Width: " + width + " px<br>Height: " + height + " px";
+      }
+
+      // Hiển thị ngay khi load trang
+      showWindowSize();
+
+      // Cập nhật khi resize
+      window.addEventListener("resize", showWindowSize);
+    </script>
+    <div id="ajax"></div>
+
+    <br />
+
+    <input type="button" onclick="fetch_api()" value="Fetch API" />
+
+    <script>
+      async function fetch_api() {
+        const ajaxDiv = document.getElementById("ajax");
+        ajaxDiv.innerHTML = "Đang tải dữ liệu...";
+
+        // Lấy 3 quote ngẫu nhiên theo show Naruto
+        const url =
+          "https://yurippe.vercel.app/api/quotes?show=" +
+          encodeURIComponent("naruto") +
+          "&random=3";
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error("HTTP " + res.status);
+
+          const data = await res.json(); // data là mảng
+
+          if (!Array.isArray(data) || data.length === 0) {
+            ajaxDiv.innerHTML = "Không tìm thấy quote cho Naruto.";
+            return;
+          }
+
+          ajaxDiv.innerHTML = data
+            .map(
+              (item, idx) => `
+          <p><b>${idx + 1}.</b> ${item.quote}</p>
+          <div class="meta">— ${item.character} (${item.show})</div>
+        `,
+            )
+            .join("<hr>");
+        } catch (err) {
+          console.error(err);
+          ajaxDiv.innerHTML =
+            "Lỗi khi gọi API. Mở Console (F12) để xem chi tiết.";
+        }
+      }
+    </script>
+  </body>
+</html>
